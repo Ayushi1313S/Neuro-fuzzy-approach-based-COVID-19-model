@@ -1,0 +1,94 @@
+[System]
+Name='Simulation'
+Type='mamdani'
+Version=2.0
+NumInputs=8
+NumOutputs=1
+NumRules=8
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Age'
+Range=[8 110]
+NumMFs=3
+MF1='Young':'trapmf',[-30.3 3.75 24.5 39.1033153430995]
+MF2='Adult':'trimf',[24.2 41.8 56.7979953739399]
+MF3='Old-Age_Follows':'trapmf',[48.8 72.8 112.084040092521 126]
+
+[Input2]
+Name='Covid-19_History'
+Range=[-2 2]
+NumMFs=3
+MF1='Once':'trapmf',[-1.13851195065536 0.0984880493446415 0.569488049344641 1.63148804934464]
+MF2='Twice':'trapmf',[0.994546646106399 1.5035466461064 2.2535466461064 3.0835466461064]
+MF3='Never':'trapmf',[-3 -2 -0.956052428681573 0.00123]
+
+[Input3]
+Name='Asthma_History'
+Range=[0 1]
+NumMFs=3
+MF1='Yes':'gaussmf',[0.1769 -1.388e-17]
+MF2='High':'gaussmf',[0.1769 1]
+MF3='Medium':'gaussmf',[0.2123 0.5]
+
+[Input4]
+Name='Fever'
+Range=[0 110]
+NumMFs=3
+MF1='High':'trimf',[-45.83 0 45.83]
+MF2='Medium':'trimf',[9.167 55 100.8]
+MF3='mf3':'trimf',[54.7381110254433 109.748111025443 165.148111025443]
+
+[Input5]
+Name='Cough_and_Cold'
+Range=[0 1]
+NumMFs=3
+MF1='Yes':'trimf',[-0.416666666666667 0 0.416666666666667]
+MF2='Medium':'trimf',[0.0833333333333333 0.5 0.916666666666667]
+MF3='No':'trimf',[0.583333333333333 1 1.41666666666667]
+
+[Input6]
+Name='Headache'
+Range=[0 1]
+NumMFs=3
+MF1='Weak':'trimf',[-0.416666666666667 0 0.416666666666667]
+MF2='Medium':'trimf',[0.0833333333333333 0.5 0.916666666666667]
+MF3='Strong':'trimf',[0.583333333333333 1 1.41666666666667]
+
+[Input7]
+Name='Fatigue'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trimf',[-0.416666666666667 0 0.416666666666667]
+MF2='Medium':'trimf',[0.0833333333333333 0.5 0.916666666666667]
+MF3='No':'trimf',[0.583333333333333 1 1.41666666666667]
+
+[Input8]
+Name='Shortening_of_Breath'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trimf',[-0.416666666666667 0 0.416666666666667]
+MF2='Medium':'trimf',[0.0833333333333333 0.5 0.916666666666667]
+MF3='High':'trimf',[0.583333333333333 1 1.41666666666667]
+
+[Output1]
+Name='Immune_Response'
+Range=[0 1]
+NumMFs=3
+MF1='Weak':'trimf',[-0.416666666666667 0 0.416666666666667]
+MF2='Medium':'trimf',[0.0833333333333333 0.5 0.916666666666667]
+MF3='Strong':'trimf',[0.583333333333333 1 1.41666666666667]
+
+[Rules]
+1 3 1 1 2 1 1 1, 2 (1) : 1
+2 3 2 2 2 2 2 1, 1 (1) : 2
+2 3 2 2 -1 -1 1 -2, -1 (1) : 1
+1 2 2 2 2 1 2 1, 2 (1) : 1
+1 3 3 3 2 3 2 1, 2 (1) : 1
+3 3 2 2 3 3 2 2, 3 (1) : 1
+2 3 2 2 2 -1 2 -2, -2 (1) : 1
+2 3 2 3 3 1 1 3, -3 (1) : 1
